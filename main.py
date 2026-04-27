@@ -15,7 +15,7 @@ def run_pipeline(nlp_choice: str):
     print("="*50)
     
     # 1. Scrape
-    raw_data = run_scraper(nlp_choice=nlp_choice, max_articles=100)
+    raw_data = run_scraper(nlp_choice=nlp_choice, max_articles=500)
     
     # 2. Clean
     cleaned_df = run_cleaner(raw_data)
