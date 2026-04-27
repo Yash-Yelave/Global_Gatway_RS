@@ -9,3 +9,11 @@ requests
 python-dateutil
 APScheduler
 python-dotenv
+newspaper3k
+beautifulsoup4
+lxml_html_clean
+groq
+pydantic
+langdetect
+rapidfuzz
+sentence-transformers
