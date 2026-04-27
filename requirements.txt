@@ -1,0 +1,11 @@
+pandas
+numpy
+spacy
+textblob
+scikit-learn
+SQLAlchemy
+feedparser
+requests
+python-dateutil
+APScheduler
+python-dotenv

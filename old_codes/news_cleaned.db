@@ -1,0 +1,41 @@
+CREATE TABLE IF NOT EXISTS articles (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    url_hash TEXT UNIQUE NOT NULL,
+    url TEXT NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT,
+    author TEXT DEFAULT 'Unknown',
+    published_date DATETIME,
+    
+    -- Extracted Metadata
+    category TEXT,
+    tags TEXT,                     -- Insert using json.dumps(tags_list)
+    top_image TEXT,
+    
+    -- Phase 2: Cleaning & Text Metrics
+    is_clean BOOLEAN DEFAULT 1,
+    word_count INTEGER,
+    reading_time_mins INTEGER,
+    keyword_density REAL,
+    
+    -- Phase 2: Sentiment
+    sentiment_score REAL,
+    sentiment_label_vader TEXT,
+    
+    -- Phase 2: Named Entity Recognition (NER)
+    entities_persons TEXT,         -- Insert using json.dumps(list)
+    entities_organizations TEXT,   -- Insert using json.dumps(list)
+    entities_locations TEXT,       -- Insert using json.dumps(list)
+    
+    -- Phase 2: Source & Clustering Metrics
+    source_name TEXT,
+    source_region TEXT,
+    source_tier INTEGER,
+    sub_category TEXT,
+    story_id INTEGER               -- Semantic cluster ID
+);
+
+-- Create indexes for faster querying
+CREATE INDEX IF NOT EXISTS idx_published_date ON articles(published_date);
+CREATE INDEX IF NOT EXISTS idx_category ON articles(category);
+CREATE INDEX IF NOT EXISTS idx_story_id ON articles(story_id);
