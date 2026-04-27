@@ -2,6 +2,7 @@ import os
 import sys
 import sqlite3
 import pandas as pd
+import json
 from scraper import run_scraper
 from cleaner import run_cleaner
 from nlp_pipeline import run_nlp
@@ -16,6 +17,15 @@ def run_pipeline(nlp_choice: str):
     
     # 1. Scrape
     raw_data = run_scraper(nlp_choice=nlp_choice, max_articles=500)
+    
+    if raw_data:
+        raw_df = pd.DataFrame(raw_data)
+        if 'tags' in raw_df.columns:
+            raw_df['tags'] = raw_df['tags'].apply(lambda x: json.dumps(x) if isinstance(x, list) else x)
+        raw_conn = sqlite3.connect("raw_data.db")
+        raw_df.to_sql("raw_articles", raw_conn, if_exists="replace", index=False)
+        raw_conn.close()
+        print("\n[+] Raw scraped data saved to new database: 'raw_data.db'")
     
     # 2. Clean
     cleaned_df = run_cleaner(raw_data)
