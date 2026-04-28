@@ -8,7 +8,7 @@ from cleaner import run_cleaner
 from nlp_pipeline import run_nlp
 from recommender import run_recommender
 from database import init_db, engine
-from config import config
+from config import settings
 
 def run_pipeline(nlp_choice: str):
     print("\n" + "="*50)
@@ -41,7 +41,7 @@ def run_pipeline(nlp_choice: str):
 
     # 5. Save to Database
     print("\n--- Saving to SQLite ---")
-    conn = sqlite3.connect(config.DATABASE_URI.replace("sqlite:///", ""))
+    conn = sqlite3.connect(settings.DATABASE_URL.replace("sqlite:///", ""))
     
     # Save the DataFrames directly via pandas to_sql (similar to old colab flow)
     tables["master"].to_sql("articles", conn, if_exists="replace", index=False)
@@ -59,7 +59,7 @@ def run_pipeline(nlp_choice: str):
 def verify_output():
     print("\n--- Output Verification ---")
     try:
-        conn = sqlite3.connect(config.DATABASE_URI.replace("sqlite:///", ""))
+        conn = sqlite3.connect(settings.DATABASE_URL.replace("sqlite:///", ""))
         trending_df = pd.read_sql("SELECT * FROM trending_articles LIMIT 10", con=conn)
         similar_df = pd.read_sql("SELECT * FROM similar_articles LIMIT 10", con=conn)
         
