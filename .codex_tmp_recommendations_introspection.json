@@ -1,0 +1,381 @@
+{
+  "path": "recommendations.db",
+  "objects": [
+    {
+      "name": "sqlite_autoindex_raw_articles_1",
+      "type": "index",
+      "sql": null
+    },
+    {
+      "name": "articles",
+      "type": "table",
+      "sql": "CREATE TABLE \"articles\" (\n\"article_id\" TEXT,\n  \"url\" TEXT,\n  \"source\" TEXT,\n  \"title\" TEXT,\n  \"description\" TEXT,\n  \"author\" TEXT,\n  \"tags\" TEXT,\n  \"category\" TEXT,\n  \"sentiment\" TEXT,\n  \"publish_date\" TEXT,\n  \"top_image\" TEXT,\n  \"scraped_at\" TEXT,\n  \"is_clean\" INTEGER,\n  \"lang\" TEXT,\n  \"freshness_decay_score\" REAL,\n  \"view_count\" INTEGER,\n  \"trending_score\" REAL,\n  \"category_rank\" REAL\n)"
+    },
+    {
+      "name": "category_rankings",
+      "type": "table",
+      "sql": "CREATE TABLE \"category_rankings\" (\n\"article_id\" TEXT,\n  \"title\" TEXT,\n  \"category\" TEXT,\n  \"category_rank\" REAL,\n  \"trending_score\" REAL\n)"
+    },
+    {
+      "name": "raw_articles",
+      "type": "table",
+      "sql": "CREATE TABLE raw_articles (\n\tarticle_id VARCHAR NOT NULL, \n\tpayload_json JSON NOT NULL, \n\tscraped_at VARCHAR, \n\tPRIMARY KEY (article_id)\n)"
+    },
+    {
+      "name": "similar_articles",
+      "type": "table",
+      "sql": "CREATE TABLE \"similar_articles\" (\n\"article_id\" TEXT,\n  \"similar_articles_json\" TEXT\n)"
+    },
+    {
+      "name": "trending_articles",
+      "type": "table",
+      "sql": "CREATE TABLE \"trending_articles\" (\n\"article_id\" TEXT,\n  \"title\" TEXT,\n  \"category\" TEXT,\n  \"view_count\" INTEGER,\n  \"freshness_decay_score\" REAL,\n  \"trending_score\" REAL\n)"
+    }
+  ],
+  "tables": [
+    "articles",
+    "category_rankings",
+    "raw_articles",
+    "similar_articles",
+    "trending_articles"
+  ],
+  "table_info": {
+    "articles": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "article_id",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 1,
+          "name": "url",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "source",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "title",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "description",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "author",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "tags",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "category",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 8,
+          "name": "sentiment",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 9,
+          "name": "publish_date",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 10,
+          "name": "top_image",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 11,
+          "name": "scraped_at",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 12,
+          "name": "is_clean",
+          "type": "INTEGER",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 13,
+          "name": "lang",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 14,
+          "name": "freshness_decay_score",
+          "type": "REAL",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 15,
+          "name": "view_count",
+          "type": "INTEGER",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 16,
+          "name": "trending_score",
+          "type": "REAL",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 17,
+          "name": "category_rank",
+          "type": "REAL",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    "category_rankings": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "article_id",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 1,
+          "name": "title",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "category",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "category_rank",
+          "type": "REAL",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "trending_score",
+          "type": "REAL",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    "raw_articles": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "article_id",
+          "type": "VARCHAR",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "payload_json",
+          "type": "JSON",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "scraped_at",
+          "type": "VARCHAR",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "index": {
+            "seq": 0,
+            "name": "sqlite_autoindex_raw_articles_1",
+            "unique": 1,
+            "origin": "pk",
+            "partial": 0
+          },
+          "info": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "article_id"
+            }
+          ],
+          "xinfo": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "article_id",
+              "desc": 0,
+              "coll": "BINARY",
+              "key": 1
+            },
+            {
+              "seqno": 1,
+              "cid": -1,
+              "name": null,
+              "desc": 0,
+              "coll": "BINARY",
+              "key": 0
+            }
+          ]
+        }
+      ]
+    },
+    "similar_articles": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "article_id",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 1,
+          "name": "similar_articles_json",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    },
+    "trending_articles": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "article_id",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 1,
+          "name": "title",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "category",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "view_count",
+          "type": "INTEGER",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "freshness_decay_score",
+          "type": "REAL",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "trending_score",
+          "type": "REAL",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": []
+    }
+  }
+}
